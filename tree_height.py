@@ -27,17 +27,17 @@ def main():
     n = int(input())
     if ("I" in choice):
         #n = int(input())
-        elements = input().split()
+        elements = numpy.array(input().split())
     #D:/testfails.txt
     if ("F" in choice):
         print("Input file path")
         while True:
             path = input()
-            if ("a" in path.lower()):
-                print("File not allowed")
-            else:
+            if ("a" not in path.lower()):
+                #print("File not allowed")
+            #else:
                 f = open(path, "r")
-                elements = f.read().split()
+                elements = numpy.array(f.read().split())
                 f.close()
                 break
 
