@@ -24,10 +24,13 @@ def main():
     # implement input form keyboard and from files
 
     choice = input()
+    #n = int(input())
     if ("I" in choice):
         n = int(input())
         elements = numpy.array(list(map(int, input().split())))
+    #D:/testfails.txt
     if ("F" in choice):
+        print("Input file path")
         path = input()
         path = "./test/" + path
         if ("a" not in path.lower()):
@@ -36,18 +39,12 @@ def main():
             elements = numpy.array(list(map (int, f.readline().split())))
             f.close()
 
-
-    parents = []
     try:
         for i in range(0, n):
             if (int(elements[i]) == -1):
                 root = elements[i]
-            if (-1 <= int(elements[i]) and int(elements[i]) <= n-1):
-                parents.append(int(elements[i]))
-            else:
-                break
 
-        height = compute_height(root, parents)
+        height = compute_height(root, elements)
         print(height-1)
     except:
         print("error")
