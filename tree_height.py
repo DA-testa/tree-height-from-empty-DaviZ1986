@@ -24,13 +24,10 @@ def main():
     # implement input form keyboard and from files
 
     choice = input()
-    #n = int(input())
     if ("I" in choice):
         n = int(input())
         elements = numpy.array(list(map(int, input().split())))
-    #D:/testfails.txt
     if ("F" in choice):
-        print("Input file path")
         path = input()
         if ("a" not in path.lower()):
             f = open(path, "r")
