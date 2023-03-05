@@ -24,35 +24,33 @@ def main():
     # implement input form keyboard and from files
 
     choice = input()
-    n = int(input())
+    #n = int(input())
     if ("I" in choice):
-        #n = int(input())
-        elements = numpy.array(input().split())
+        n = int(input())
+        elements = numpy.array(list(map(int, input().split())))
     #D:/testfails.txt
     if ("F" in choice):
         print("Input file path")
-        while True:
-            path = input()
-            if ("a" not in path.lower()):
-                #print("File not allowed")
-            #else:
-                f = open(path, "r")
-                elements = numpy.array(f.read().split())
-                f.close()
-                break
+        path = input()
+        if ("a" not in path.lower()):
+            f = open(path, "r")
+            n = int(f.readline())
+            elements = numpy.array(list(map (int, f.readline().split())))
+            f.close()
+
 
     parents = []
     try:
         for i in range(0, n):
+            if (int(elements[i]) == -1):
+                root = elements[i]
             if (-1 <= int(elements[i]) and int(elements[i]) <= n-1):
                 parents.append(int(elements[i]))
             else:
                 break
 
-        root = parents.index(-1)
-
         height = compute_height(root, parents)
-        print(height)
+        print(height-1)
     except:
         print("error")
     # let user input file name to use, don't allow file names with letter a
