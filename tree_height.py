@@ -29,6 +29,7 @@ def main():
         elements = numpy.array(list(map(int, input().split())))
     if ("F" in choice):
         path = input()
+        path = "./test/" + path
         if ("a" not in path.lower()):
             f = open(path, "r")
             n = int(f.readline())
