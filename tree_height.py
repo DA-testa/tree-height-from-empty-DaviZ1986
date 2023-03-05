@@ -1,33 +1,51 @@
 # python3
 
+#Dāvis Zommers 221RDB150 7.grupa
+
+from itertools import combinations_with_replacement
 import sys
 import threading
 import numpy
 
 
 def compute_height(n, parents):
-    # Write this function
-    max_height = 0
-    # Your code here
-    return max_height
+    heights = [0] * len(parents)
+    for i in range(len(parents)):
+        if heights[i] != 0:
+            continue
+        height = 0
+        j = i
+        while j != -1:
+            if heights[j] != 0:
+                height += heights[j]
+                break
+            height += 1
+            j = parents[j]
+        heights[i] = height
+    return max(heights) + 1
 
 
 def main():
-    # implement input form keyboard and from files
-    
-    # let user input file name to use, don't allow file names with letter a
-    # account for github input inprecision
-    
-    # input number of elements
-    # input values in one variable, separate with space, split these values in an array
-    # call the function and output it's result
-    pass
+    choice = input()
+    if ("I" in choice):
+        n = int(input())
+        elements = numpy.array(list(map(int, input().split())))
+    if ("F" in choice):
+        print("Input file path")
+        path = input()
+        path = "./test/" + path
+        if ("a" not in path.lower()):
+            f = open(path, "r")
+            n = int(f.readline())
+            elements = numpy.array(list(map (int, f.readline().split())))
+            f.close()
 
-# In Python, the default limit on recursion depth is rather low,
-# so raise it here for this problem. Note that to take advantage
-# of bigger stack, we have to launch the computation in a new thread.
-sys.setrecursionlimit(10**7)  # max depth of recursion
-threading.stack_size(2**27)   # new thread will get stack of such size
+    for i in range(n):
+            if int(elements[i]) == -1:
+                root = elements[i]
+
+    height = compute_height(root, elements)
+    print(height - 1)
+sys.setrecursionlimit(10**7)
+threading.stack_size(2**27)
 threading.Thread(target=main).start()
-main()
-# print(numpy.array([1,2,3]))
