@@ -8,16 +8,19 @@ import threading
 import numpy
 
 
-def compute_height(n, parents):
-    # Write this function
+def compute_height(n, parents, cache):
+    if cache[n] != -1:
+        return cache[n]
+
     max_height = 0
-    # Your code here
-    for i in range (len(parents)):
-        if (parents[i] == n):
-            childHeight = compute_height(i, parents)
-            if (childHeight > max_height):
+    for i in range(len(parents)):
+        if parents[i] == n:
+            childHeight = compute_height(i, parents, cache)
+            if childHeight > max_height:
                 max_height = childHeight
-    return max_height + 1
+
+    cache[n] = max_height + 1
+    return cache[n]
 
 
 def main():
@@ -40,12 +43,13 @@ def main():
             f.close()
 
     try:
-        for i in range(0, n):
-            if (int(elements[i]) == -1):
+        cache = numpy.full(n, -1, dtype=int)
+        for i in range(n):
+            if int(elements[i]) == -1:
                 root = elements[i]
 
-        height = compute_height(root, elements)
-        print(height-1)
+        height = compute_height(root, elements, cache)
+        print(height - 1)
     except:
         print("error")
     # let user input file name to use, don't allow file names with letter a
